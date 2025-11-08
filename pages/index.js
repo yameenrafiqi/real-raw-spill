@@ -176,7 +176,7 @@ export async function getServerSideProps() {
 
   try {
     await connectToDatabase();
-    const posts = await Post.find({ published: true })
+    const posts = await Post.find({ published: true, trending: true })
       .sort({ createdAt: -1 })
       .lean();
 

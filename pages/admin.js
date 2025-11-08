@@ -16,6 +16,7 @@ export default function Admin() {
     tags: "",
     featuredImage: "",
     published: true,
+    trending: false,
   });
 
   useEffect(() => {
@@ -128,6 +129,7 @@ export default function Admin() {
           tags: "",
           featuredImage: "",
           published: true,
+          trending: false,
         });
         fetchPosts(password);
       } else {
@@ -150,6 +152,7 @@ export default function Admin() {
       tags: post.tags.join(", "),
       featuredImage: post.featuredImage || "",
       published: post.published,
+      trending: post.trending || false,
     });
     setShowForm(true);
   };
@@ -389,6 +392,22 @@ export default function Admin() {
                   />
                   <span className="text-black font-black text-lg">
                     PUBLISH IMMEDIATELY
+                  </span>
+                </label>
+              </div>
+
+              <div className="mb-8">
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.trending}
+                    onChange={(e) =>
+                      setFormData({ ...formData, trending: e.target.checked })
+                    }
+                    className="mr-3 w-6 h-6 border-4 border-black"
+                  />
+                  <span className="text-black font-black text-lg">
+                    TRENDING (SHOW ON HOME PAGE)
                   </span>
                 </label>
               </div>

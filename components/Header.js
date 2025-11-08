@@ -26,6 +26,16 @@ export default function Header() {
               Home
             </Link>
             <Link 
+              href="/articles" 
+              className={`px-4 py-2 font-black uppercase text-sm md:text-base border-2 transition-all transform hover:scale-105 ${
+                router.pathname === "/articles" 
+                  ? "bg-yellow-400 text-black border-yellow-400" 
+                  : "bg-black text-white border-white hover:bg-white hover:text-black"
+              }`}
+            >
+              Articles
+            </Link>
+            <Link 
               href="/about" 
               className={`px-4 py-2 font-black uppercase text-sm md:text-base border-2 transition-all transform hover:scale-105 ${
                 router.pathname === "/about" 
