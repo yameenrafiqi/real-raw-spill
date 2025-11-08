@@ -255,10 +255,10 @@ export default function Home({ posts }) {
         </div>
         
         {/* Background decorative elements with images */}
-        <div className="absolute top-10 left-10 w-32 h-32 border-4 border-black rotate-45 overflow-hidden opacity-40">
+        <div className="absolute bottom-20 left-10 w-20 h-20 border-4 border-black rotate-45 overflow-hidden opacity-40">
           <img src="/images/food.jpg" alt="" className="w-full h-full object-cover -rotate-45" />
         </div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 border-4 border-black -rotate-12 overflow-hidden opacity-40">
+        <div className="absolute bottom-10 right-10 w-24 h-24 border-4 border-black -rotate-12 overflow-hidden opacity-40">
           <img src="/images/sofa.jpeg" alt="" className="w-full h-full object-cover rotate-12" />
         </div>
       </div>
