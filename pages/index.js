@@ -39,13 +39,13 @@ export default function Home({ posts }) {
   return (
     <Layout>
       {/* Hero Section with Brutalist Typography and Images */}
-      <div className="relative overflow-hidden bg-black text-white py-20 px-6">
+      <div className="relative overflow-hidden bg-black text-white py-12 md:py-20 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="relative z-10">
-            <h1 className="text-6xl md:text-9xl mb-8 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <h1 className="text-5xl md:text-9xl mb-6 md:mb-8 leading-none animate-slide-in break-words" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               RAWSPILL
             </h1>
-            <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
+            <p className="text-base md:text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em] break-words">
               {typedText}
               <span className="animate-blink">|</span>
             </p>
@@ -87,7 +87,7 @@ export default function Home({ posts }) {
             <div className="space-y-6">
               <div className="bg-black text-white p-6 md:p-8 border-4 md:border-8 border-black transform hover:translate-x-2 hover:translate-y-2 transition-transform">
                 <h2 className="text-3xl md:text-4xl font-black mb-4 text-yellow-400">TRENDING NOW</h2>
-                <p className="font-mono text-base md:text-lg">
+                <p className="font-mono text-sm md:text-lg leading-relaxed">
                   Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.
                 </p>
               </div>
@@ -95,11 +95,11 @@ export default function Home({ posts }) {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-yellow-400 border-4 border-black p-4 md:p-6 transform hover:-rotate-2 transition-transform">
                   <div className="text-3xl md:text-4xl font-black mb-2">{posts.length}</div>
-                  <div className="font-mono text-xs md:text-sm">TRENDING POSTS</div>
+                  <div className="font-mono text-xs md:text-sm uppercase">Trending</div>
                 </div>
                 <div className="bg-white border-4 border-black p-4 md:p-6 transform hover:rotate-2 transition-transform">
-                  <div className="text-4xl font-black mb-2">∞</div>
-                  <div className="font-mono text-sm">RAW IDEAS</div>
+                  <div className="text-3xl md:text-4xl font-black mb-2">∞</div>
+                  <div className="font-mono text-xs md:text-sm uppercase">Raw Ideas</div>
                 </div>
               </div>
             </div>
@@ -108,11 +108,11 @@ export default function Home({ posts }) {
       </div>
 
       {/* Brutalist Grid Layout */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
         {posts.length === 0 ? (
-          <div className="text-center py-20 bg-yellow-400 border-8 border-black transform -rotate-1">
-            <p className="text-4xl font-black text-black mb-4">NO POSTS YET</p>
-            <p className="text-xl font-mono">Check back soon for raw content!</p>
+          <div className="text-center py-12 md:py-20 bg-yellow-400 border-4 md:border-8 border-black transform -rotate-1">
+            <p className="text-3xl md:text-4xl font-black text-black mb-4">NO POSTS YET</p>
+            <p className="text-lg md:text-xl font-mono">Check back soon for raw content!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[200px]">
