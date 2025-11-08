@@ -203,8 +203,14 @@ export default function Home({ posts }) {
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              {/* Decorative element */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-black border-8 border-yellow-400 transform rotate-12"></div>
+              {/* Decorative element with kitaab image */}
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 border-8 border-yellow-400 transform rotate-12 overflow-hidden">
+                <img 
+                  src="/images/kitaab.jpg" 
+                  alt="Book" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Center - Text */}
@@ -236,8 +242,14 @@ export default function Home({ posts }) {
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              {/* Decorative element */}
-              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-black border-8 border-yellow-400 transform -rotate-12"></div>
+              {/* Decorative element with laptop image */}
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-8 border-yellow-400 transform -rotate-12 overflow-hidden">
+                <img 
+                  src="/images/laptop.jpg" 
+                  alt="Laptop" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
