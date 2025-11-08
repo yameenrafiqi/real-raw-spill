@@ -69,6 +69,44 @@ export default function Home({ posts }) {
         </div>
       </div>
 
+      {/* Decorative Section */}
+      <div className="bg-white py-16 border-t-8 border-b-8 border-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Left side - Images collage */}
+            <div className="relative h-96">
+              <div className="absolute top-0 left-0 w-2/3 h-2/3 border-8 border-black overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+                <img src="/images/PHOTO-2025-11-08-17-08-40.jpg" alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div className="absolute bottom-0 right-0 w-2/3 h-2/3 border-8 border-yellow-400 bg-black overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                <img src="/images/PHOTO-2025-11-08-17-09-12.jpg" alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              </div>
+            </div>
+
+            {/* Right side - Text */}
+            <div className="space-y-6">
+              <div className="bg-black text-white p-8 border-8 border-black transform hover:translate-x-2 hover:translate-y-2 transition-transform">
+                <h2 className="text-4xl font-black mb-4 text-yellow-400">TRENDING NOW</h2>
+                <p className="font-mono text-lg">
+                  Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-yellow-400 border-4 border-black p-6 transform hover:-rotate-2 transition-transform">
+                  <div className="text-4xl font-black mb-2">{posts.length}</div>
+                  <div className="font-mono text-sm">TRENDING POSTS</div>
+                </div>
+                <div className="bg-white border-4 border-black p-6 transform hover:rotate-2 transition-transform">
+                  <div className="text-4xl font-black mb-2">∞</div>
+                  <div className="font-mono text-sm">RAW IDEAS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Brutalist Grid Layout */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         {posts.length === 0 ? (
