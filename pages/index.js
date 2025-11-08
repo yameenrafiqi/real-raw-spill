@@ -192,11 +192,11 @@ export default function Home({ posts }) {
 
       {/* Brutalist CTA Section */}
       <div className="bg-yellow-400 border-t-8 border-b-8 border-black py-16 px-6 my-16 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left - Image */}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 items-center">
+            {/* Left - Image 1 */}
             <div className="relative flex justify-center">
-              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-72 h-[550px]">
+              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-64 h-[500px]">
                 <img 
                   src="/images/nayerpeer.jpg" 
                   alt="Nayer" 
@@ -204,25 +204,20 @@ export default function Home({ posts }) {
                 />
               </div>
               {/* Decorative element */}
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-black border-8 border-yellow-400 transform rotate-12"></div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-black border-8 border-yellow-400 transform rotate-12"></div>
             </div>
 
-            {/* Right - Text */}
-            <div className="text-center md:text-left relative z-10">
-              <h2 className="text-5xl md:text-7xl font-black mb-6 leading-none">
+            {/* Center - Text */}
+            <div className="text-center relative z-10">
+              <h2 className="text-4xl md:text-6xl font-black mb-6 leading-none">
                 STAY RAW.
                 <br />
                 STAY REAL.
               </h2>
-              <p className="text-xl md:text-2xl font-mono mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl font-mono mb-8 leading-relaxed">
                 Follow the journey of growth, exploration, and authentic living.
               </p>
               <div className="relative inline-block">
-                {/* Arrow line connecting to image */}
-                <svg className="absolute -left-40 top-1/2 w-32 h-16 pointer-events-none hidden md:block" viewBox="0 0 120 60">
-                  <path d="M 120 30 Q 90 10, 60 30 T 0 30" stroke="black" strokeWidth="4" fill="none" strokeDasharray="8,8" />
-                  <circle cx="0" cy="30" r="6" fill="black" />
-                </svg>
                 <Link
                   href="/contact"
                   className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
@@ -230,6 +225,19 @@ export default function Home({ posts }) {
                   CONNECT WITH ME →
                 </Link>
               </div>
+            </div>
+
+            {/* Right - Image 2 */}
+            <div className="relative flex justify-center">
+              <div className="relative border-8 border-black overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500 w-64 h-[500px]">
+                <img 
+                  src="/images/peer_curly.jpg" 
+                  alt="Nayer" 
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-black border-8 border-yellow-400 transform -rotate-12"></div>
             </div>
           </div>
         </div>
