@@ -112,6 +112,10 @@ export default function Contact() {
           <a
             href="mailto:syednayer@rawspill.com"
             className="border-4 border-black p-8 bg-white hover:bg-yellow-400 transition-all transform hover:scale-105 group"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = 'mailto:syednayer@rawspill.com';
+            }}
           >
             <div className="flex flex-col items-center text-center">
               <svg className="w-16 h-16 mb-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
