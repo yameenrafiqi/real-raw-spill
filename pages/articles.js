@@ -26,7 +26,7 @@ export default function Articles({ posts }) {
       <div className="relative overflow-hidden bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
         <div className="max-w-7xl mx-auto">
           <div className="relative z-10">
-            <h1 className="text-6xl md:text-9xl font-black mb-8 leading-none animate-slide-in">
+            <h1 className="text-6xl md:text-9xl mb-8 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               ARTICLES
             </h1>
             <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in">

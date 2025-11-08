@@ -6,7 +6,7 @@ export default function About() {
       {/* Hero Section */}
       <div className="bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none">
+          <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
             ABOUT
           </h1>
           <p className="text-2xl md:text-3xl font-mono text-yellow-400 mb-4">

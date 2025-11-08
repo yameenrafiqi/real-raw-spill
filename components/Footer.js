@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-2xl font-black mb-4">RAWSPILL</h3>
+            <h3 className="text-2xl mb-4" style={{ fontFamily: "'Permanent Marker', cursive" }}>RAWSPILL</h3>
             <p className="font-mono text-gray-400 text-sm leading-relaxed">
               RawSpill exists as a space to pause, breathe, and write with intention. Writing here is a meditation, a mindful practice that turns reflection into clarity. It captures the raw contours of a life in motion, inviting others to find their own meaning in its words.
             </p>

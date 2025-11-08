@@ -10,7 +10,8 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link 
             href="/" 
-            className="text-3xl md:text-4xl font-black tracking-tighter hover:text-yellow-400 transition-colors transform hover:scale-105 inline-block"
+            className="text-3xl md:text-4xl tracking-tighter hover:text-yellow-400 transition-colors transform hover:scale-105 inline-block"
+            style={{ fontFamily: "'Permanent Marker', cursive" }}
           >
             RAWSPILL
           </Link>
