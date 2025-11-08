@@ -195,12 +195,12 @@ export default function Home({ posts }) {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left - Image */}
-            <div className="relative">
-              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 max-h-[500px]">
+            <div className="relative flex justify-center">
+              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-72 h-[550px]">
                 <img 
                   src="/images/nayerpeer.jpg" 
                   alt="Nayer" 
-                  className="w-full h-full object-cover object-[center_30%] hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
                 {/* Overlay accent */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-black opacity-80"></div>
