@@ -205,7 +205,7 @@ export default function Admin() {
         {/* Hero Section */}
         <div className="bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none">
+            <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               ADMIN
             </h1>
             <p className="text-2xl font-mono text-yellow-400">
