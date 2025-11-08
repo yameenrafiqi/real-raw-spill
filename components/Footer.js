@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="border-t-2 border-gray-800 pt-8">
           <p className="text-center font-mono text-sm text-gray-400">
-            © {new Date().getFullYear()} RAWSPILL • Built with Next.js, MongoDB & Tailwind CSS
+            © 2025 RAWSPILL • Designed with logic, built with passion — Syed Yameen Rafiqi
           </p>
         </div>
       </div>
