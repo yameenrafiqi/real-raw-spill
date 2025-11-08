@@ -73,7 +73,7 @@ export default function Articles({ posts }) {
                 >
                   {/* Featured Image */}
                   {post.featuredImage && (
-                    <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <div className="absolute inset-0 opacity-40 group-hover:opacity-50 transition-opacity">
                       <img
                         src={post.featuredImage}
                         alt={post.title}
