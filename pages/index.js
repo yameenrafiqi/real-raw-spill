@@ -202,8 +202,6 @@ export default function Home({ posts }) {
                   alt="Nayer" 
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
-                {/* Overlay accent */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-black opacity-80"></div>
               </div>
               {/* Decorative element */}
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-black border-8 border-yellow-400 transform rotate-12"></div>
