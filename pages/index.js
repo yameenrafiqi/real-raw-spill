@@ -204,7 +204,7 @@ export default function Home({ posts }) {
                 />
               </div>
               {/* Decorative element with kitaab image */}
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 border-8 border-yellow-400 transform rotate-12 overflow-hidden">
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 border-8 border-black transform rotate-12 overflow-hidden">
                 <img 
                   src="/images/kitaab.jpg" 
                   alt="Book" 
@@ -243,7 +243,7 @@ export default function Home({ posts }) {
                 />
               </div>
               {/* Decorative element with laptop image */}
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-8 border-yellow-400 transform -rotate-12 overflow-hidden">
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-8 border-black transform -rotate-12 overflow-hidden">
                 <img 
                   src="/images/laptop.jpg" 
                   alt="Laptop" 
