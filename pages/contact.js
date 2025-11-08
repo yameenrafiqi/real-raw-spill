@@ -59,10 +59,32 @@ export default function Contact() {
     
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      // Send data to webhook
+      const response = await fetch('https://hook.eu1.make.com/k2r7fx6jbj8ksfj1moshioynytdl6lvt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1000);
+      setErrors({ submit: 'Failed to send message. Please try again.' });
+    }
   };
 
   const handleChange = (e) => {
@@ -288,6 +310,12 @@ export default function Contact() {
                   {formData.message.length} characters
                 </p>
               </div>
+
+              {errors.submit && (
+                <div className="p-4 bg-red-100 border-4 border-red-600 text-red-600 font-mono text-sm font-bold">
+                  {errors.submit}
+                </div>
+              )}
 
               <button
                 type="submit"
