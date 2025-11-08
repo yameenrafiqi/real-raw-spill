@@ -198,41 +198,69 @@ export default function Admin() {
   if (!isAuthenticated) {
     return (
       <Layout>
-        <div className="max-w-md mx-auto px-6 py-12">
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-              Admin Login
+        {/* Hero Section */}
+        <div className="bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none">
+              ADMIN
             </h1>
+            <p className="text-2xl font-mono text-yellow-400">
+              Dashboard Login
+            </p>
+          </div>
+        </div>
+
+        {/* Login Form */}
+        <div className="max-w-2xl mx-auto px-6 py-16">
+          <div className="bg-white border-8 border-black p-12 transform hover:scale-[1.01] transition-transform">
             {loginError && (
-              <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                {loginError}
+              <div className="mb-8 p-6 bg-red-600 border-4 border-black text-white">
+                <div className="flex items-center">
+                  <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <span className="font-black text-xl">{loginError}</span>
+                </div>
               </div>
             )}
+
             <form onSubmit={handleLogin}>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Admin Password
+              <div className="mb-8">
+                <label className="block text-black font-black mb-4 text-2xl">
+                  ADMIN PASSWORD
                 </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    setLoginError(""); // Clear error when user types
+                    setLoginError("");
                   }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter admin password"
+                  className="w-full px-6 py-4 border-4 border-black font-mono text-lg focus:outline-none focus:border-yellow-400 bg-white"
+                  placeholder="Enter password..."
                   required
                 />
               </div>
+
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-8 py-5 bg-black text-white font-black text-xl border-4 border-black hover:bg-yellow-400 hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
               >
-                {loading ? "Checking..." : "Login"}
+                {loading ? "CHECKING..." : "LOGIN →"}
               </button>
             </form>
+
+            {/* Decorative corner */}
+            <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 border-4 border-black transform rotate-45"></div>
+          </div>
+
+          {/* Info Box */}
+          <div className="mt-8 border-4 border-black p-6 bg-yellow-400">
+            <p className="font-mono text-black">
+              <span className="font-black">NOTE:</span> This area is restricted to administrators only. 
+              Unauthorized access is prohibited.
+            </p>
           </div>
         </div>
       </Layout>
@@ -241,34 +269,44 @@ export default function Admin() {
 
   return (
     <Layout>
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Admin Dashboard</h1>
+      {/* Hero Section */}
+      <div className="bg-black text-white py-16 px-6 border-b-8 border-yellow-400">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div>
+            <h1 className="text-5xl md:text-7xl font-black mb-2 leading-none">
+              DASHBOARD
+            </h1>
+            <p className="text-xl font-mono text-yellow-400">
+              Content Management
+            </p>
+          </div>
           <div className="flex gap-4">
             <button
               onClick={() => setShowForm(true)}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              className="px-6 py-3 bg-yellow-400 text-black font-black border-4 border-yellow-400 hover:bg-white transition-all transform hover:scale-105"
             >
-              + Create New Post
+              + NEW POST
             </button>
             <button
               onClick={handleLogout}
-              className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium"
+              className="px-6 py-3 bg-black text-white font-black border-4 border-white hover:bg-red-600 hover:border-red-600 transition-all transform hover:scale-105"
             >
-              Logout
+              LOGOUT
             </button>
           </div>
         </div>
+      </div>
 
+      <div className="max-w-6xl mx-auto px-6 py-12">
         {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              {editingPost ? "Edit Post" : "Create New Post"}
+          <div className="bg-white border-8 border-black p-8 mb-8 relative">
+            <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4">
+              {editingPost ? "EDIT POST" : "CREATE NEW POST"}
             </h2>
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Title *
+              <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  TITLE *
                 </label>
                 <input
                   type="text"
@@ -276,28 +314,26 @@ export default function Admin() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
                   required
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Body * (Markdown supported)
+              <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  BODY * (Markdown supported)
                 </label>
-                <textarea
-                  value={formData.body}
-                  onChange={(e) =>
+                onChange={(e) =>
                     setFormData({ ...formData, body: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-64"
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400 h-64 resize-none"
                   required
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Author
+              <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  AUTHOR
                 </label>
                 <input
                   type="text"
@@ -305,13 +341,13 @@ export default function Admin() {
                   onChange={(e) =>
                     setFormData({ ...formData, author: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Tags (comma-separated)
+                            <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  TAGS (comma-separated)
                 </label>
                 <input
                   type="text"
@@ -319,14 +355,14 @@ export default function Admin() {
                   onChange={(e) =>
                     setFormData({ ...formData, tags: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
                   placeholder="tech, web, design"
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Featured Image URL
+              <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  FEATURED IMAGE URL
                 </label>
                 <input
                   type="url"
@@ -334,23 +370,23 @@ export default function Admin() {
                   onChange={(e) =>
                     setFormData({ ...formData, featuredImage: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
 
-              <div className="mb-6">
-                <label className="flex items-center">
+              <div className="mb-8">
+                <label className="flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.published}
                     onChange={(e) =>
                       setFormData({ ...formData, published: e.target.checked })
                     }
-                    className="mr-2 w-5 h-5"
+                    className="mr-3 w-6 h-6 border-4 border-black"
                   />
-                  <span className="text-gray-700 font-medium">
-                    Publish immediately
+                  <span className="text-black font-black text-lg">
+                    PUBLISH IMMEDIATELY
                   </span>
                 </label>
               </div>
@@ -359,53 +395,57 @@ export default function Admin() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50"
+                  className="px-8 py-4 bg-black text-white font-black border-4 border-black hover:bg-yellow-400 hover:text-black transition-all disabled:opacity-50 transform hover:scale-105"
                 >
-                  {loading ? "Saving..." : editingPost ? "Update Post" : "Create Post"}
+                  {loading ? "SAVING..." : editingPost ? "UPDATE POST" : "CREATE POST"}
                 </button>
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition font-medium"
+                  className="px-8 py-4 bg-white text-black font-black border-4 border-black hover:bg-red-600 hover:text-white transition-all transform hover:scale-105"
                 >
-                  Cancel
+                  CANCEL
                 </button>
               </div>
             </form>
+            <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-400 border-4 border-black transform rotate-45"></div>
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">All Posts</h2>
+        <div className="bg-white border-8 border-black p-8">
+          <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4">ALL POSTS</h2>
           {loading ? (
-            <p className="text-gray-600">Loading...</p>
+            <p className="font-mono text-xl">LOADING...</p>
           ) : posts.length === 0 ? (
-            <p className="text-gray-600">No posts yet. Create your first post!</p>
+            <div className="border-4 border-black p-8 bg-yellow-400 text-center">
+              <p className="font-black text-2xl">NO POSTS YET!</p>
+              <p className="font-mono mt-2">Create your first post to get started.</p>
+            </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {posts.map((post) => (
                 <div
                   key={post._id}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+                  className="border-4 border-black p-6 hover:bg-yellow-400 transition relative"
                 >
-                  <div className="flex justify-between items-start">
+                  <div className="flex justify-between items-start">\
                     <div className="flex-grow">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-2xl font-black text-black mb-3">
                         {post.title}
                       </h3>
-                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
-                        <span>{post.author}</span>
+                      <div className="flex items-center gap-4 text-sm font-mono mb-3">
+                        <span className="font-bold">{post.author}</span>
                         <span>•</span>
                         <span>
                           {new Date(post.createdAt).toLocaleDateString()}
                         </span>
                         <span>•</span>
                         <span
-                          className={
-                            post.published ? "text-green-600" : "text-red-600"
-                          }
+                          className={`font-bold ${
+                            post.published ? "text-green-700" : "text-red-700"
+                          }`}
                         >
-                          {post.published ? "Published" : "Draft"}
+                          {post.published ? "PUBLISHED" : "DRAFT"}
                         </span>
                       </div>
                       {post.tags && post.tags.length > 0 && (
@@ -413,7 +453,7 @@ export default function Admin() {
                           {post.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
+                              className="px-3 py-1 bg-black text-white text-xs font-mono border-2 border-black"
                             >
                               #{tag}
                             </span>
@@ -421,23 +461,23 @@ export default function Admin() {
                         </div>
                       )}
                     </div>
-                    <div className="flex gap-2 ml-4">
+                    <div className="flex gap-3 ml-4">
                       <button
                         onClick={() => handleEdit(post)}
-                        className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition font-medium text-sm"
+                        className="px-6 py-3 bg-yellow-400 text-black font-black border-4 border-black hover:bg-white transition transform hover:scale-105"
                       >
-                        Edit
+                        EDIT
                       </button>
                       <button
                         onClick={() => handleDelete(post._id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-medium text-sm"
+                        className="px-6 py-3 bg-red-600 text-white font-black border-4 border-black hover:bg-black hover:text-red-600 transition transform hover:scale-105"
                       >
-                        Delete
+                        DELETE
                       </button>
                     </div>
                   </div>
                 </div>
-              ))}
+              ))}\
             </div>
           )}
         </div>
