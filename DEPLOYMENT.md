@@ -150,7 +150,7 @@ Features:
 
 ## Contact
 
-- Email: syednayer016@gmail.com
+- Email: syednayer@rawspill.com
 - GitHub: [@yameenrafiqi](https://github.com/yameenrafiqi)
 
 ## License

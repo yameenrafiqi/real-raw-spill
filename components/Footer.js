@@ -19,9 +19,12 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-lg font-black mb-4 text-yellow-400">CONNECT</h4>
-            <p className="font-mono text-gray-400 text-sm mb-2">
-              syednayer016@gmail.com
-            </p>
+                        <a 
+              href="mailto:syednayer@rawspill.com" 
+              className="hover:text-yellow-400 transition-colors font-mono"
+            >
+              syednayer@rawspill.com
+            </a>
             <p className="font-mono text-gray-400 text-sm">
               Response: ~1 week
             </p>
