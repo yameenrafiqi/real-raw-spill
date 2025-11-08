@@ -130,9 +130,9 @@ export default function About() {
           <div className="flex flex-col justify-center">
             <div className="bg-yellow-400 border-4 border-black p-8 mb-6 transform hover:scale-[1.02] transition-transform">
               <p className="font-mono text-lg leading-relaxed text-black">
-                I'm always eager to connect with people who value growth, balance, and exploration. 
-                Whether it's a conversation about personal development, mental well-being, or the 
-                journeys we take both within ourselves and across the world, I'd love to hear from you.
+                Nayer Ahtisham is a writer shaped by a journey through banking halls, corporate boardrooms, and the quiet spaces of personal reflection. He believes that life is not about chasing perfection but about embracing the challenges and struggles that shape who we are. Through writing, he transforms experiences into stories that offer clarity, insight, and inspiration.
+                
+                Based in Liverpool, UK.
               </p>
             </div>
             <div className="border-4 border-black p-8">
