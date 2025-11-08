@@ -38,22 +38,34 @@ export default function Home({ posts }) {
 
   return (
     <Layout>
-      {/* Hero Section with Brutalist Typography */}
+      {/* Hero Section with Brutalist Typography and Images */}
       <div className="relative overflow-hidden bg-black text-white py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="relative z-10">
-                    <h1 className="text-6xl md:text-9xl font-black mb-8 leading-none animate-slide-in">
-          RAWSPILL
-        </h1>
-        <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
-          {typedText}
-          <span className="animate-blink">|</span>
-        </p>
+            <h1 className="text-6xl md:text-9xl font-black mb-8 leading-none animate-slide-in">
+              RAWSPILL
+            </h1>
+            <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
+              {typedText}
+              <span className="animate-blink">|</span>
+            </p>
           </div>
           
-          {/* Animated Background Elements */}
-          <div className="absolute top-10 right-10 w-40 h-40 border-8 border-yellow-400 rotate-12 animate-spin-slow"></div>
-          <div className="absolute bottom-10 left-20 w-32 h-32 bg-yellow-400 opacity-20 animate-float"></div>
+          {/* Brutalist Image Collage */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-10 right-10 w-48 h-48 border-8 border-yellow-400 overflow-hidden rotate-12 animate-pulse-slow">
+              <img src="/images/PHOTO-2025-11-08-17-08-40.jpg" alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="absolute bottom-20 left-10 w-56 h-56 border-8 border-yellow-400 overflow-hidden -rotate-6 animate-float">
+              <img src="/images/PHOTO-2025-11-08-17-09-12.jpg" alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="absolute top-1/3 left-1/4 w-40 h-40 border-8 border-yellow-400 overflow-hidden rotate-45 animate-spin-slow">
+              <img src="/images/PHOTO-2025-11-08-17-08-28.jpg" alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="absolute bottom-10 right-1/4 w-44 h-44 border-8 border-yellow-400 overflow-hidden -rotate-12">
+              <img src="/images/PHOTO-2025-11-08-17-10-04.jpg" alt="" className="w-full h-full object-cover" />
+            </div>
+          </div>
         </div>
       </div>
 
