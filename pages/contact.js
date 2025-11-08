@@ -124,7 +124,7 @@ export default function Contact() {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com/in/syednayer"
+            href="https://www.linkedin.com/in/syednayer/"
             target="_blank"
             rel="noopener noreferrer"
             className="border-4 border-black p-8 bg-white hover:bg-yellow-400 transition-all transform hover:scale-105 group"
