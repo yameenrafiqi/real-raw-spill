@@ -191,23 +191,47 @@ export default function Home({ posts }) {
       </div>
 
       {/* Brutalist CTA Section */}
-      <div className="bg-yellow-400 border-t-8 border-b-8 border-black py-16 px-6 my-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-7xl font-black mb-6 leading-none">
-            STAY RAW.
-            <br />
-            STAY REAL.
-          </h2>
-          <p className="text-xl font-mono mb-8">
-            Follow the journey of growth, exploration, and authentic living.
-          </p>
-          <Link
-            href="/about"
-            className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-110"
-          >
-            Connect With Me →
-          </Link>
+      <div className="bg-yellow-400 border-t-8 border-b-8 border-black py-16 px-6 my-16 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left - Image */}
+            <div className="relative">
+              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                <img 
+                  src="/images/nayerpeer.jpg" 
+                  alt="Nayer" 
+                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                />
+                {/* Overlay accent */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-black opacity-80"></div>
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-black border-8 border-yellow-400 transform rotate-12"></div>
+            </div>
+
+            {/* Right - Text */}
+            <div className="text-center md:text-left relative z-10">
+              <h2 className="text-5xl md:text-7xl font-black mb-6 leading-none">
+                STAY RAW.
+                <br />
+                STAY REAL.
+              </h2>
+              <p className="text-xl md:text-2xl font-mono mb-8 leading-relaxed">
+                Follow the journey of growth, exploration, and authentic living.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
+              >
+                CONNECT WITH ME →
+              </Link>
+            </div>
+          </div>
         </div>
+        
+        {/* Background decorative elements */}
+        <div className="absolute top-10 right-10 w-20 h-20 border-4 border-black opacity-20 rotate-45"></div>
+        <div className="absolute bottom-10 left-10 w-16 h-16 border-4 border-black opacity-20 -rotate-12"></div>
       </div>
     </Layout>
   );
