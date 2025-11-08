@@ -10,6 +10,8 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationType, setNotificationType] = useState("success"); // "success" or "error"
   const [typedText, setTypedText] = useState("");
   const fullText = "Let's Connect";
   
@@ -76,14 +78,22 @@ export default function Contact() {
 
       if (response.ok) {
         setIsSubmitting(false);
-        setIsSuccess(true);
+        setNotificationType("success");
+        setShowNotification(true);
+        // Reset form
+        setFormData({ name: "", email: "", message: "" });
+        // Hide notification after 5 seconds
+        setTimeout(() => setShowNotification(false), 5000);
       } else {
         throw new Error('Failed to send message');
       }
     } catch (error) {
       console.error('Error sending message:', error);
       setIsSubmitting(false);
-      setErrors({ submit: 'Failed to send message. Please try again.' });
+      setNotificationType("error");
+      setShowNotification(true);
+      // Hide notification after 5 seconds
+      setTimeout(() => setShowNotification(false), 5000);
     }
   };
 
@@ -98,39 +108,60 @@ export default function Contact() {
   const resetForm = () => {
     setFormData({ name: "", email: "", message: "" });
     setErrors({});
-    setIsSuccess(false);
   };
-
-  if (isSuccess) {
-    return (
-      <Layout>
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="bg-yellow-400 border-8 border-black p-12 text-center transform hover:scale-[1.02] transition-transform">
-            <div className="mb-8">
-              <div className="w-24 h-24 mx-auto bg-black flex items-center justify-center transform rotate-12">
-                <svg className="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            <h2 className="text-5xl font-black mb-6">MESSAGE SENT!</h2>
-            <p className="text-xl font-mono mb-8 max-w-2xl mx-auto">
-              Thank you for reaching out. I'll get back to you as soon as possible.
-            </p>
-            <button
-              onClick={resetForm}
-              className="px-8 py-4 bg-black text-white font-black border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105"
-            >
-              SEND ANOTHER MESSAGE
-            </button>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
+      {/* Notification Popup */}
+      {showNotification && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+          <div className={`${
+            notificationType === "success" ? "bg-yellow-400" : "bg-red-600"
+          } border-8 border-black p-8 md:p-12 max-w-md w-full transform animate-slide-in shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]`}>
+            <div className="text-center">
+              <div className={`w-20 h-20 mx-auto ${
+                notificationType === "success" ? "bg-black" : "bg-white"
+              } flex items-center justify-center transform rotate-12 mb-6`}>
+                {notificationType === "success" ? (
+                  <svg className="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg className="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                )}
+              </div>
+              
+              <h2 className={`text-3xl md:text-4xl font-black mb-4 ${
+                notificationType === "success" ? "text-black" : "text-white"
+              }`}>
+                {notificationType === "success" ? "MESSAGE SENT!" : "FAILED TO SEND!"}
+              </h2>
+              
+              <p className={`text-lg font-mono mb-6 ${
+                notificationType === "success" ? "text-black" : "text-white"
+              }`}>
+                {notificationType === "success" 
+                  ? "Thank you! I'll get back to you soon." 
+                  : "Something went wrong. Please try again."}
+              </p>
+              
+              <button
+                onClick={() => setShowNotification(false)}
+                className={`px-6 py-3 font-black border-4 border-black transition-all transform hover:scale-105 ${
+                  notificationType === "success" 
+                    ? "bg-black text-white hover:bg-white hover:text-black" 
+                    : "bg-white text-black hover:bg-black hover:text-white"
+                }`}
+              >
+                CLOSE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <div className="relative bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
         {/* Background Image */}
@@ -260,7 +291,7 @@ export default function Contact() {
                   onChange={handleChange}
                   className={`w-full px-4 py-3 border-4 ${
                     errors.name ? "border-red-600" : "border-black"
-                  } font-mono focus:outline-none focus:border-yellow-400`}
+                  } font-mono text-black focus:outline-none focus:border-yellow-400`}
                   placeholder="Your name"
                 />
                 {errors.name && (
@@ -280,7 +311,7 @@ export default function Contact() {
                   onChange={handleChange}
                   className={`w-full px-4 py-3 border-4 ${
                     errors.email ? "border-red-600" : "border-black"
-                  } font-mono focus:outline-none focus:border-yellow-400`}
+                  } font-mono text-black focus:outline-none focus:border-yellow-400`}
                   placeholder="your.email@example.com"
                 />
                 {errors.email && (
@@ -300,7 +331,7 @@ export default function Contact() {
                   rows={6}
                   className={`w-full px-4 py-3 border-4 ${
                     errors.message ? "border-red-600" : "border-black"
-                  } font-mono focus:outline-none focus:border-yellow-400 resize-none`}
+                  } font-mono text-black focus:outline-none focus:border-yellow-400 resize-none`}
                   placeholder="Share your thoughts, ideas, or questions..."
                 />
                 {errors.message && (
