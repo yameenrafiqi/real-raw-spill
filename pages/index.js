@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
+import Head from "next/head";
 import { connectToDatabase } from "../lib/mongoose";
 import Post from "../models/Post";
 
@@ -38,6 +39,15 @@ export default function Home({ posts }) {
 
   return (
     <Layout>
+      <Head>
+        <title>RAWSPILL - Unfiltered thoughts on life, growth, and exploration</title>
+        <meta name="description" content="Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between. A platform for passionate writers creating meaningful content." />
+        <meta property="og:title" content="RAWSPILL - Unfiltered thoughts on life, growth, and exploration" />
+        <meta property="og:description" content="Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between." />
+        <meta property="og:url" content="https://690ed4b9824cac4bd2c9c63e--rawspillsnp.netlify.app/" />
+        <meta name="twitter:title" content="RAWSPILL - Unfiltered thoughts on life, growth, and exploration" />
+        <meta name="twitter:description" content="Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between." />
+      </Head>
       {/* Hero Section with Brutalist Typography and Images */}
       <div className="relative overflow-hidden bg-black text-white py-12 md:py-20 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
