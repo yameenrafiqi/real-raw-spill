@@ -12,7 +12,7 @@ export default function Admin() {
   const [formData, setFormData] = useState({
     title: "",
     body: "",
-    author: "Syed Yameen Rafiqi",
+    author: "Syed Nayer Ahtisham",
     tags: "",
     featuredImage: "",
     published: true,
@@ -125,7 +125,7 @@ export default function Admin() {
         setFormData({
           title: "",
           body: "",
-          author: "Syed Yameen Rafiqi",
+          author: "Syed Nayer Ahtisham",
           tags: "",
           featuredImage: "",
           published: true,
@@ -191,10 +191,11 @@ export default function Admin() {
     setFormData({
       title: "",
       body: "",
-      author: "Syed Yameen Rafiqi",
+      author: "Syed Nayer Ahtisham",
       tags: "",
       featuredImage: "",
       published: true,
+      trending: false,
     });
   };
 
