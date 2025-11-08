@@ -12,9 +12,9 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-black mb-4 text-yellow-400">QUICK LINKS</h4>
             <ul className="space-y-2 font-mono text-sm">
-              <li><a href="/" className="hover:text-yellow-400 transition">Home</a></li>
-              <li><a href="/about" className="hover:text-yellow-400 transition">About</a></li>
-              <li><a href="/admin" className="hover:text-yellow-400 transition">Admin</a></li>
+              <li><a href="/" className="hover:text-yellow-400 transition">HOME</a></li>
+              <li><a href="/about" className="hover:text-yellow-400 transition">ABOUT</a></li>
+              <li><a href="/admin" className="hover:text-yellow-400 transition">ADMIN</a></li>
             </ul>
           </div>
           <div>
