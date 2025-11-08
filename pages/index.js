@@ -200,7 +200,7 @@ export default function Home({ posts }) {
                 <img 
                   src="/images/nayerpeer.jpg" 
                   alt="Nayer" 
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-[center_30%] hover:scale-105 transition-transform duration-500"
                 />
                 {/* Overlay accent */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-black opacity-80"></div>
