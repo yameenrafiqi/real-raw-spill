@@ -196,11 +196,11 @@ export default function Home({ posts }) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left - Image */}
             <div className="relative">
-              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 max-h-[500px]">
                 <img 
                   src="/images/nayerpeer.jpg" 
                   alt="Nayer" 
-                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                 />
                 {/* Overlay accent */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-black opacity-80"></div>
@@ -219,12 +219,19 @@ export default function Home({ posts }) {
               <p className="text-xl md:text-2xl font-mono mb-8 leading-relaxed">
                 Follow the journey of growth, exploration, and authentic living.
               </p>
-              <Link
-                href="/contact"
-                className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
-              >
-                CONNECT WITH ME →
-              </Link>
+              <div className="relative inline-block">
+                {/* Arrow line connecting to image */}
+                <svg className="absolute -left-40 top-1/2 w-32 h-16 pointer-events-none hidden md:block" viewBox="0 0 120 60">
+                  <path d="M 120 30 Q 90 10, 60 30 T 0 30" stroke="black" strokeWidth="4" fill="none" strokeDasharray="8,8" />
+                  <circle cx="0" cy="30" r="6" fill="black" />
+                </svg>
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
+                >
+                  CONNECT WITH ME →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
