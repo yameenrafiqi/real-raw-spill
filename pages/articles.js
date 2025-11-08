@@ -71,7 +71,18 @@ export default function Articles({ posts }) {
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <div className="flex flex-col h-full justify-between">
+                  {/* Featured Image */}
+                  {post.featuredImage && (
+                    <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex flex-col h-full justify-between relative z-10">
                     <div>
                       <h2 className="text-2xl md:text-3xl font-black mb-3 leading-tight group-hover:underline">
                         {post.title}
