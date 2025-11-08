@@ -86,11 +86,11 @@ export default function PostPage({ post }) {
             {post.title}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-4 text-lg font-mono">
-            <div className="px-4 py-2 bg-yellow-400 border-2 border-black font-black">
-              {post.author.toUpperCase()}
+          <div className="flex flex-wrap items-center gap-4 text-base md:text-lg font-mono">
+            <div className="text-black font-black uppercase">
+              {post.author}
             </div>
-            <div className="px-4 py-2 border-2 border-black">
+            <div className="text-gray-600">
               {formattedDate}
             </div>
           </div>
