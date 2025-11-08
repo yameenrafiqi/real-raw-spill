@@ -323,7 +323,9 @@ export default function Admin() {
                 <label className="block text-black font-black mb-3 text-xl">
                   BODY * (Markdown supported)
                 </label>
-                onChange={(e) =>
+                <textarea
+                  value={formData.body}
+                  onChange={(e) =>
                     setFormData({ ...formData, body: e.target.value })
                   }
                   className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400 h-64 resize-none"
@@ -429,7 +431,7 @@ export default function Admin() {
                   className="border-4 border-black p-6 hover:bg-yellow-400 transition relative"
                 >
                   <div className="flex justify-between items-start">
-                    <div className="flex-grow">\
+                    <div className="flex-grow">
                       <h3 className="text-2xl font-black text-black mb-3">
                         {post.title}
                       </h3>
