@@ -96,8 +96,13 @@ export default function PostPage({ post }) {
           </div>
         </header>
 
-        <div className="prose prose-lg max-w-none mb-12 font-mono text-lg leading-relaxed">
-          <ReactMarkdown>{post.body}</ReactMarkdown>
+        <div className="border-4 border-black bg-white mb-12">
+          <div className="border-b-4 border-black"></div>
+          <div className="p-6 md:p-8">
+            <div className="prose prose-lg max-w-none font-mono text-lg leading-relaxed">
+              <ReactMarkdown>{post.body}</ReactMarkdown>
+            </div>
+          </div>
         </div>
 
         <div className="bg-yellow-400 border-4 border-black p-8 text-center transform hover:scale-[1.02] transition-transform">
