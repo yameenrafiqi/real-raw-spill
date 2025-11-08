@@ -34,29 +34,29 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Profile Image */}
           <div className="relative">
-            <div className="border-8 border-black overflow-hidden transform hover:rotate-2 transition-transform">
+            <div className="border-4 md:border-8 border-black overflow-hidden transform hover:rotate-2 transition-transform">
               <img
                 src="/nayer_peer.jpeg"
                 alt="Syed Nayer"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-yellow-400 border-4 border-black px-6 py-3 font-black text-2xl transform rotate-3">
+            <div className="absolute -bottom-4 -right-4 bg-yellow-400 border-4 border-black px-4 md:px-6 py-2 md:py-3 font-black text-lg md:text-2xl transform rotate-3">
               SYED NAYER
             </div>
           </div>
 
           {/* Bio */}
           <div className="flex flex-col justify-center">
-            <div className="bg-yellow-400 border-4 border-black p-8 mb-6 transform hover:scale-[1.02] transition-transform">
-              <p className="font-mono text-lg leading-relaxed text-black">
+            <div className="bg-yellow-400 border-4 border-black p-6 md:p-8 mb-6 transform hover:scale-[1.02] transition-transform">
+              <p className="font-mono text-base md:text-lg leading-relaxed text-black">
                 Nayer Ahtisham is a writer shaped by a journey through banking halls, corporate boardrooms, and the quiet spaces of personal reflection. He believes that life is not about chasing perfection but about embracing the challenges and struggles that shape who we are. Through writing, he transforms experiences into stories that offer clarity, insight, and inspiration.
                 
                 Based in Liverpool, UK.
               </p>
             </div>
-            <div className="border-4 border-black p-8">
-              <p className="font-mono text-lg leading-relaxed">
+            <div className="border-4 border-black p-6 md:p-8">
+              <p className="font-mono text-base md:text-lg leading-relaxed">
                 Let's share ideas, experiences, and stories that inspire us to live wiser, stronger, 
                 and more human.
               </p>
@@ -66,7 +66,7 @@ export default function About() {
 
         {/* Topics Grid */}
         <div className="mb-16">
-          <h2 className="text-4xl md:text-6xl font-black mb-8 border-l-8 border-yellow-400 pl-6">
+          <h2 className="text-3xl md:text-6xl font-black mb-8 border-l-4 md:border-l-8 border-yellow-400 pl-4 md:pl-6">
             WHAT I WRITE ABOUT
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -80,7 +80,7 @@ export default function About() {
             ].map((topic, index) => (
               <div
                 key={topic}
-                className={`border-4 border-black p-6 font-black text-xl transform hover:scale-105 transition-all cursor-pointer ${
+                className={`border-4 border-black p-4 md:p-6 font-black text-lg md:text-xl transform hover:scale-105 transition-all cursor-pointer ${
                   index % 3 === 0 ? "bg-yellow-400" : index % 3 === 1 ? "bg-black text-white hover:bg-yellow-400 hover:text-black" : "bg-white"
                 }`}
               >

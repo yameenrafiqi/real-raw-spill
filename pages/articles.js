@@ -50,9 +50,9 @@ export default function Articles({ posts }) {
       <div className="max-w-7xl mx-auto px-6 py-16">
         {posts.length === 0 ? (
           <div className="text-center py-20">
-            <div className="inline-block bg-yellow-400 text-black p-12 border-8 border-black transform -rotate-2">
-              <h2 className="text-4xl font-black mb-4">NO ARTICLES YET</h2>
-              <p className="text-xl font-mono">Check back soon for new content!</p>
+            <div className="inline-block bg-yellow-400 text-black p-8 md:p-12 border-4 md:border-8 border-black transform -rotate-2">
+              <h2 className="text-3xl md:text-4xl font-black mb-4">NO ARTICLES YET</h2>
+              <p className="text-lg md:text-xl font-mono">Check back soon for new content!</p>
             </div>
           </div>
         ) : (
@@ -73,9 +73,9 @@ export default function Articles({ posts }) {
                   href={`/posts/${post.slug}`}
                   className={`${getCardSize(
                     index
-                  )} ${colors[index % colors.length]} border-8 ${
+                  )} ${colors[index % colors.length]} border-4 md:border-8 ${
                     borders[index % borders.length]
-                  } p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group ${
+                  } p-4 md:p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group ${
                     isHovered ? "z-10" : ""
                   }`}
                   onMouseEnter={() => setHoveredIndex(index)}

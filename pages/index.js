@@ -52,7 +52,7 @@ export default function Home({ posts }) {
           </div>
           
           {/* Brutalist Image Collage */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute inset-0 opacity-20 pointer-events-none hidden md:block">
             <div className="absolute top-10 right-10 w-48 h-48 border-8 border-yellow-400 overflow-hidden rotate-12 animate-pulse-slow">
               <img src="/images/PHOTO-2025-11-08-17-08-40.jpg" alt="" className="w-full h-full object-cover" />
             </div>
@@ -74,30 +74,30 @@ export default function Home({ posts }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left side - Images collage */}
-            <div className="relative h-96">
-              <div className="absolute top-0 left-0 w-2/3 h-2/3 border-8 border-black overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="relative h-64 md:h-96">
+              <div className="absolute top-0 left-0 w-2/3 h-2/3 border-4 md:border-8 border-black overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img src="/images/PHOTO-2025-11-08-17-08-40.jpg" alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
               </div>
-              <div className="absolute bottom-0 right-0 w-2/3 h-2/3 border-8 border-yellow-400 bg-black overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="absolute bottom-0 right-0 w-2/3 h-2/3 border-4 md:border-8 border-yellow-400 bg-black overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img src="/images/PHOTO-2025-11-08-17-09-12.jpg" alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
               </div>
             </div>
 
             {/* Right side - Text */}
             <div className="space-y-6">
-              <div className="bg-black text-white p-8 border-8 border-black transform hover:translate-x-2 hover:translate-y-2 transition-transform">
-                <h2 className="text-4xl font-black mb-4 text-yellow-400">TRENDING NOW</h2>
-                <p className="font-mono text-lg">
+              <div className="bg-black text-white p-6 md:p-8 border-4 md:border-8 border-black transform hover:translate-x-2 hover:translate-y-2 transition-transform">
+                <h2 className="text-3xl md:text-4xl font-black mb-4 text-yellow-400">TRENDING NOW</h2>
+                <p className="font-mono text-base md:text-lg">
                   Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.
                 </p>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-yellow-400 border-4 border-black p-6 transform hover:-rotate-2 transition-transform">
-                  <div className="text-4xl font-black mb-2">{posts.length}</div>
-                  <div className="font-mono text-sm">TRENDING POSTS</div>
+                <div className="bg-yellow-400 border-4 border-black p-4 md:p-6 transform hover:-rotate-2 transition-transform">
+                  <div className="text-3xl md:text-4xl font-black mb-2">{posts.length}</div>
+                  <div className="font-mono text-xs md:text-sm">TRENDING POSTS</div>
                 </div>
-                <div className="bg-white border-4 border-black p-6 transform hover:rotate-2 transition-transform">
+                <div className="bg-white border-4 border-black p-4 md:p-6 transform hover:rotate-2 transition-transform">
                   <div className="text-4xl font-black mb-2">∞</div>
                   <div className="font-mono text-sm">RAW IDEAS</div>
                 </div>
@@ -196,7 +196,7 @@ export default function Home({ posts }) {
           <div className="grid md:grid-cols-3 gap-8 items-center">
             {/* Left - Image 1 */}
             <div className="relative flex justify-center">
-              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-64 h-[500px]">
+              <div className="relative border-8 border-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-500 w-48 md:w-64 h-[350px] md:h-[500px]">
                 <img 
                   src="/images/nayerpeer.jpg" 
                   alt="Nayer" 
@@ -204,7 +204,7 @@ export default function Home({ posts }) {
                 />
               </div>
               {/* Decorative element with kitaab image */}
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 border-8 border-black transform rotate-12 overflow-hidden">
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 md:w-32 md:h-32 border-8 border-black transform rotate-12 overflow-hidden hidden sm:block">
                 <img 
                   src="/images/kitaab.jpg" 
                   alt="Book" 
@@ -215,18 +215,18 @@ export default function Home({ posts }) {
 
             {/* Center - Text */}
             <div className="text-center relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black mb-6 leading-none">
+              <h2 className="text-3xl md:text-6xl font-black mb-6 leading-none">
                 STAY RAW.
                 <br />
                 STAY REAL.
               </h2>
-              <p className="text-lg md:text-xl font-mono mb-8 leading-relaxed">
+              <p className="text-base md:text-xl font-mono mb-8 leading-relaxed">
                 Follow the journey of growth, exploration, and authentic living.
               </p>
               <div className="relative inline-block">
                 <Link
                   href="/contact"
-                  className="inline-block px-8 py-4 bg-black text-white text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
+                  className="inline-block px-6 md:px-8 py-3 md:py-4 bg-black text-white text-lg md:text-xl font-black uppercase border-4 border-black hover:bg-white hover:text-black transition-all transform hover:scale-105 hover:rotate-2"
                 >
                   CONNECT WITH ME →
                 </Link>
@@ -235,7 +235,7 @@ export default function Home({ posts }) {
 
             {/* Right - Image 2 */}
             <div className="relative flex justify-center">
-              <div className="relative border-8 border-black overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500 w-64 h-[500px]">
+              <div className="relative border-8 border-black overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500 w-48 md:w-64 h-[350px] md:h-[500px]">
                 <img 
                   src="/images/peer_curly.jpg" 
                   alt="Nayer" 
@@ -243,7 +243,7 @@ export default function Home({ posts }) {
                 />
               </div>
               {/* Decorative element with laptop image */}
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-8 border-black transform -rotate-12 overflow-hidden">
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 md:w-32 md:h-32 border-8 border-black transform -rotate-12 overflow-hidden hidden sm:block">
                 <img 
                   src="/images/laptop.jpg" 
                   alt="Laptop" 
@@ -255,10 +255,10 @@ export default function Home({ posts }) {
         </div>
         
         {/* Background decorative elements with images */}
-        <div className="absolute top-10 left-10 w-20 h-20 border-4 border-black rotate-6 overflow-hidden opacity-80">
+        <div className="hidden md:block absolute top-10 left-10 w-20 h-20 border-4 border-black rotate-6 overflow-hidden opacity-80">
           <img src="/images/food.jpg" alt="" className="w-full h-full object-cover -rotate-6" />
         </div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 border-4 border-black -rotate-12 overflow-hidden opacity-80">
+        <div className="hidden md:block absolute bottom-10 right-10 w-24 h-24 border-4 border-black -rotate-12 overflow-hidden opacity-80">
           <img src="/images/sofa.jpeg" alt="" className="w-full h-full object-cover rotate-12" />
         </div>
       </div>

@@ -216,14 +216,14 @@ export default function Admin() {
 
         {/* Login Form */}
         <div className="max-w-2xl mx-auto px-6 py-16">
-          <div className="bg-white border-8 border-black p-12 transform hover:scale-[1.01] transition-transform">
+          <div className="bg-white border-4 md:border-8 border-black p-6 md:p-12 transform hover:scale-[1.01] transition-transform">
             {loginError && (
-              <div className="mb-8 p-6 bg-red-600 border-4 border-black text-white">
+              <div className="mb-6 md:mb-8 p-4 md:p-6 bg-red-600 border-4 border-black text-white">
                 <div className="flex items-center">
-                  <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
-                  <span className="font-black text-xl">{loginError}</span>
+                  <span className="font-black text-lg md:text-xl">{loginError}</span>
                 </div>
               </div>
             )}
@@ -275,25 +275,25 @@ export default function Admin() {
     <Layout>
       {/* Hero Section */}
       <div className="bg-black text-white py-16 px-6 border-b-8 border-yellow-400">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h1 className="text-5xl md:text-7xl font-black mb-2 leading-none">
+            <h1 className="text-4xl md:text-7xl font-black mb-2 leading-none">
               DASHBOARD
             </h1>
-            <p className="text-xl font-mono text-yellow-400">
+            <p className="text-lg md:text-xl font-mono text-yellow-400">
               Content Management
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4 w-full md:w-auto">
             <button
               onClick={() => setShowForm(true)}
-              className="px-6 py-3 bg-yellow-400 text-black font-black border-4 border-yellow-400 hover:bg-white transition-all transform hover:scale-105"
+              className="px-4 md:px-6 py-2 md:py-3 bg-yellow-400 text-black font-black text-sm md:text-base border-4 border-yellow-400 hover:bg-white transition-all transform hover:scale-105 flex-1 md:flex-none"
             >
               + NEW POST
             </button>
             <button
               onClick={handleLogout}
-              className="px-6 py-3 bg-black text-white font-black border-4 border-white hover:bg-red-600 hover:border-red-600 transition-all transform hover:scale-105"
+              className="px-4 md:px-6 py-2 md:py-3 bg-black text-white font-black text-sm md:text-base border-4 border-white hover:bg-red-600 hover:border-red-600 transition-all transform hover:scale-105"
             >
               LOGOUT
             </button>
@@ -303,13 +303,13 @@ export default function Admin() {
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         {showForm && (
-          <div className="bg-white border-8 border-black p-8 mb-8 relative">
-            <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4">
+          <div className="bg-white border-4 md:border-8 border-black p-4 md:p-8 mb-8 relative">
+            <h2 className="text-2xl md:text-4xl font-black text-black mb-6 md:mb-8 border-b-4 border-black pb-4">
               {editingPost ? "EDIT POST" : "CREATE NEW POST"}
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
-                <label className="block text-black font-black mb-3 text-xl">
+                <label className="block text-black font-black mb-3 text-lg md:text-xl">
                   TITLE *
                 </label>
                 <input
@@ -434,14 +434,14 @@ export default function Admin() {
           </div>
         )}
 
-        <div className="bg-white border-8 border-black p-8">
-          <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4">ALL POSTS</h2>
+        <div className="bg-white border-4 md:border-8 border-black p-4 md:p-8">
+          <h2 className="text-2xl md:text-4xl font-black text-black mb-6 md:mb-8 border-b-4 border-black pb-4">ALL POSTS</h2>
           {loading ? (
-            <p className="font-mono text-xl">LOADING...</p>
+            <p className="font-mono text-lg md:text-xl">LOADING...</p>
           ) : posts.length === 0 ? (
-            <div className="border-4 border-black p-8 bg-yellow-400 text-center">
-              <p className="font-black text-2xl">NO POSTS YET!</p>
-              <p className="font-mono mt-2">Create your first post to get started.</p>
+            <div className="border-4 border-black p-6 md:p-8 bg-yellow-400 text-center">
+              <p className="font-black text-xl md:text-2xl">NO POSTS YET!</p>
+              <p className="font-mono mt-2 text-sm md:text-base">Create your first post to get started.</p>
             </div>
           ) : (
             <div className="space-y-6">
