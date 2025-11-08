@@ -4,8 +4,18 @@ export default function About() {
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="relative bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/about.jpg" 
+            alt="" 
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
             ABOUT
           </h1>
