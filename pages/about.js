@@ -1,6 +1,24 @@
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 
 export default function About() {
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Writer. Explorer. Truth Seeker.";
+  
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -16,13 +34,14 @@ export default function About() {
         </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+          <h1 className="text-6xl md:text-8xl mb-6 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
             ABOUT
           </h1>
-          <p className="text-2xl md:text-3xl font-mono text-yellow-400 mb-4">
-            Writer. Explorer. Truth Seeker.
+          <p className="text-2xl md:text-3xl font-mono text-yellow-400 mb-4 animate-fade-in min-h-[2em]">
+            {typedText}
+            <span className="animate-blink">|</span>
           </p>
-          <p className="text-lg md:text-xl font-mono text-white max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl font-mono text-white max-w-3xl mx-auto animate-fade-in">
             Documenting the messy, beautiful journey of becoming human —<br/>
             one raw thought at a time.
           </p>

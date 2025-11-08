@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 
 export default function Contact() {
@@ -10,6 +10,22 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Let's Connect";
+  
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    
+    return () => clearInterval(timer);
+  }, []);
 
   const validateForm = () => {
     const newErrors = {};
@@ -106,11 +122,12 @@ export default function Contact() {
         </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+          <h1 className="text-6xl md:text-8xl mb-6 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
             CONTACT
           </h1>
-          <p className="text-2xl font-mono text-yellow-400">
-            Let's Connect
+          <p className="text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
+            {typedText}
+            <span className="animate-blink">|</span>
           </p>
         </div>
       </div>

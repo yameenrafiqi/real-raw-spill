@@ -9,6 +9,8 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Dashboard Login";
   const [formData, setFormData] = useState({
     title: "",
     body: "",
@@ -18,6 +20,20 @@ export default function Admin() {
     published: true,
     trending: false,
   });
+  
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const savedPass = localStorage.getItem("adminPass");
@@ -205,11 +221,12 @@ export default function Admin() {
         {/* Hero Section */}
         <div className="bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-6xl md:text-8xl mb-6 leading-none" style={{ fontFamily: "'Permanent Marker', cursive" }}>
+            <h1 className="text-6xl md:text-8xl mb-6 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               ADMIN
             </h1>
-            <p className="text-2xl font-mono text-yellow-400">
-              Dashboard Login
+            <p className="text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
+              {typedText}
+              <span className="animate-blink">|</span>
             </p>
           </div>
         </div>

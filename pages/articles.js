@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import { connectToDatabase } from "../lib/mongoose";
@@ -6,6 +6,22 @@ import Post from "../models/Post";
 
 export default function Articles({ posts }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [typedText, setTypedText] = useState("");
+  const fullText = "All writings and reflections";
+  
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    
+    return () => clearInterval(timer);
+  }, []);
 
   // Layout pattern for brutalist asymmetric grid
   const getCardSize = (index) => {
@@ -39,8 +55,9 @@ export default function Articles({ posts }) {
             <h1 className="text-6xl md:text-9xl mb-8 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
               ARTICLES
             </h1>
-            <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in">
-              All writings and reflections
+            <p className="text-xl md:text-2xl font-mono text-yellow-400 animate-fade-in min-h-[2em]">
+              {typedText}
+              <span className="animate-blink">|</span>
             </p>
           </div>
         </div>
