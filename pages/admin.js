@@ -428,8 +428,8 @@ export default function Admin() {
                   key={post._id}
                   className="border-4 border-black p-6 hover:bg-yellow-400 transition relative"
                 >
-                  <div className="flex justify-between items-start">\
-                    <div className="flex-grow">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-grow">\
                       <h3 className="text-2xl font-black text-black mb-3">
                         {post.title}
                       </h3>
@@ -477,7 +477,7 @@ export default function Admin() {
                     </div>
                   </div>
                 </div>
-              ))}\
+              ))}
             </div>
           )}
         </div>
