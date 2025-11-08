@@ -115,6 +115,16 @@ export default function PostPage({ post }) {
 }
 
 export async function getServerSideProps({ params }) {
+  // Return null if MongoDB URI is not configured (e.g., during build)
+  if (!process.env.MONGODB_URI) {
+    console.warn("MONGODB_URI not configured - returning null post");
+    return {
+      props: {
+        post: null,
+      },
+    };
+  }
+
   try {
     await connectToDatabase();
     const post = await Post.findOne({ slug: params.slug, published: true }).lean();

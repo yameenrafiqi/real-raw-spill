@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Note: DO NOT store your MONGODB_URI here in the file
+# Instead, set it in Netlify Dashboard:
+# Site settings → Build & deploy → Environment → Environment variables
+# Add: MONGODB_URI = your_mongodb_connection_string
+
+# Also add ADMIN_PASSWORD in Netlify environment variables
+# Add: ADMIN_PASSWORD = supersecret123 (or your chosen password)

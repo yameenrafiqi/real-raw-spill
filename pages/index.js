@@ -164,6 +164,16 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps() {
+  // Return empty posts if MongoDB URI is not configured (e.g., during build)
+  if (!process.env.MONGODB_URI) {
+    console.warn("MONGODB_URI not configured - returning empty posts");
+    return {
+      props: {
+        posts: [],
+      },
+    };
+  }
+
   try {
     await connectToDatabase();
     const posts = await Post.find({ published: true })
