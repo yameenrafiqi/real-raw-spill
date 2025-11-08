@@ -23,7 +23,17 @@ export default function Articles({ posts }) {
   return (
     <Layout>
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-black text-white py-20 px-6 border-b-8 border-yellow-400">
+      <div className="relative overflow-hidden text-white py-20 px-6 border-b-8 border-yellow-400">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/books.jpg" 
+            alt="" 
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+        </div>
+        
         <div className="max-w-7xl mx-auto">
           <div className="relative z-10">
             <h1 className="text-6xl md:text-9xl mb-8 leading-none animate-slide-in" style={{ fontFamily: "'Permanent Marker', cursive" }}>
