@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import { connectToDatabase } from "../lib/mongoose";
 import Post from "../models/Post";
+import { processImageUrl } from "../lib/imageUtils";
 
 export default function Articles({ posts }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -102,7 +103,7 @@ export default function Articles({ posts }) {
                   {post.featuredImage && (
                     <div className="absolute inset-0 opacity-40 group-hover:opacity-50 transition-opacity">
                       <img
-                        src={post.featuredImage}
+                        src={processImageUrl(post.featuredImage)}
                         alt={post.title}
                         className="w-full h-full object-cover"
                       />

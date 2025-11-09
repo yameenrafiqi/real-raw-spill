@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import { connectToDatabase } from "../../lib/mongoose";
 import Post from "../../models/Post";
 import ReactMarkdown from "react-markdown";
+import { processImageUrl } from "../../lib/imageUtils";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -61,7 +62,7 @@ export default function PostPage({ post }) {
         {post.featuredImage && (
           <div className="border-8 border-black mb-12 overflow-hidden transform hover:scale-[1.02] transition-transform">
             <img
-              src={post.featuredImage}
+              src={processImageUrl(post.featuredImage)}
               alt={post.title}
               className="w-full h-64 md:h-96 object-cover"
             />
@@ -87,7 +88,20 @@ export default function PostPage({ post }) {
           <div className="border-b-4 border-black"></div>
           <div className="p-6 md:p-8">
             <div className="prose prose-lg max-w-none font-mono text-lg leading-relaxed">
-              <ReactMarkdown>{post.body}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  img: ({ node, ...props }) => (
+                    <img
+                      {...props}
+                      src={processImageUrl(props.src)}
+                      alt={props.alt || ''}
+                      className="w-full h-auto border-4 border-black my-4"
+                    />
+                  ),
+                }}
+              >
+                {post.body}
+              </ReactMarkdown>
             </div>
           </div>
         </div>
