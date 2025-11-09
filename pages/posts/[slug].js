@@ -69,19 +69,6 @@ export default function PostPage({ post }) {
         )}
 
         <header className="mb-12 pb-8 border-b-4 border-black">
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-6">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 bg-black text-white text-sm font-mono uppercase border-2 border-black hover:bg-yellow-400 hover:text-black transition-colors"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-          
           <h1 className="text-5xl md:text-7xl font-black leading-none mb-6 break-words">
             {post.title}
           </h1>
@@ -104,6 +91,19 @@ export default function PostPage({ post }) {
             </div>
           </div>
         </div>
+
+        {post.tags && post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-12">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-4 py-2 bg-black text-white text-sm font-mono uppercase border-2 border-black hover:bg-yellow-400 hover:text-black transition-colors"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="bg-yellow-400 border-4 border-black p-8 text-center transform hover:scale-[1.02] transition-transform">
           <p className="text-2xl font-black mb-4">READ MORE POSTS</p>
