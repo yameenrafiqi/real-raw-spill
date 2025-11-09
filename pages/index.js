@@ -103,20 +103,19 @@ export default function Home({ posts, totalViews }) {
                 </p>
               </div>
               
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
                 <div className="bg-yellow-400 border-4 border-black p-3 sm:p-4 md:p-6 transform hover:-rotate-2 transition-transform">
                   <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">{posts.length}</div>
                   <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase">Trending</div>
+                </div>
+                <div className="bg-black text-yellow-400 border-4 border-black p-3 sm:p-4 md:p-6 transform hover:translate-x-1 hover:translate-y-1 transition-transform">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">{totalViews.toLocaleString()}</div>
+                  <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase text-white">Total Views</div>
                 </div>
                 <div className="bg-white border-4 border-black p-3 sm:p-4 md:p-6 transform hover:rotate-2 transition-transform">
                   <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">∞</div>
                   <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase">Raw Ideas</div>
                 </div>
-              </div>
-              
-              <div className="bg-black text-yellow-400 border-4 border-black p-3 sm:p-4 md:p-6 transform hover:translate-x-1 hover:translate-y-1 transition-transform">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">{totalViews.toLocaleString()}</div>
-                <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase text-white">Total Views</div>
               </div>
             </div>
           </div>
