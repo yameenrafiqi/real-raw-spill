@@ -4,10 +4,12 @@ import Link from "next/link";
 import { connectToDatabase } from "../lib/mongoose";
 import Post from "../models/Post";
 import { processImageUrl } from "../lib/imageUtils";
+import { CATEGORIES } from "../lib/categories";
 
-export default function Articles({ posts }) {
+export default function Articles({ posts, allCategories }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [typedText, setTypedText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const fullText = "All writings and reflections";
   
   useEffect(() => {
@@ -23,6 +25,11 @@ export default function Articles({ posts }) {
     
     return () => clearInterval(timer);
   }, []);
+
+  // Filter posts based on selected category
+  const filteredPosts = selectedCategory === "All" 
+    ? posts 
+    : posts.filter(post => post.category === selectedCategory);
 
   // Layout pattern for brutalist asymmetric grid
   const getCardSize = (index) => {
@@ -66,16 +73,50 @@ export default function Articles({ posts }) {
 
       {/* Articles Grid */}
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {posts.length === 0 ? (
+        {/* Category Filter */}
+        <div className="mb-12">
+          <h2 className="text-2xl md:text-3xl font-black mb-6">FILTER BY CATEGORY</h2>
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => setSelectedCategory("All")}
+              className={`px-4 py-2 font-mono text-sm uppercase border-2 transition-all transform hover:scale-105 ${
+                selectedCategory === "All"
+                  ? "bg-yellow-400 text-black border-black"
+                  : "bg-white text-black border-black hover:bg-yellow-400"
+              }`}
+            >
+              All ({posts.length})
+            </button>
+            {allCategories.map((category) => {
+              const count = posts.filter(p => p.category === category).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 font-mono text-sm uppercase border-2 transition-all transform hover:scale-105 ${
+                    selectedCategory === category
+                      ? "bg-black text-white border-black"
+                      : "bg-white text-black border-black hover:bg-gray-100"
+                  }`}
+                >
+                  {category} ({count})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {filteredPosts.length === 0 ? (
           <div className="text-center py-20">
             <div className="inline-block bg-yellow-400 text-black p-8 md:p-12 border-4 md:border-8 border-black transform -rotate-2">
-              <h2 className="text-3xl md:text-4xl font-black mb-4">NO ARTICLES YET</h2>
-              <p className="text-lg md:text-xl font-mono">Check back soon for new content!</p>
+              <h2 className="text-3xl md:text-4xl font-black mb-4">NO ARTICLES IN THIS CATEGORY</h2>
+              <p className="text-lg md:text-xl font-mono">Try selecting a different category!</p>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[200px]">
-            {posts.map((post, index) => {
+            {filteredPosts.map((post, index) => {
               const isHovered = hoveredIndex === index;
               const colors = [
                 "bg-yellow-400",
@@ -176,9 +217,20 @@ export async function getServerSideProps() {
       .sort({ createdAt: -1 })
       .lean();
 
+    // Get unique categories from posts that have a category set
+    const categoriesFromPosts = [...new Set(
+      posts
+        .filter(post => post.category)
+        .map(post => post.category)
+    )];
+
+    // Sort categories to match the order in CATEGORIES constant
+    const allCategories = CATEGORIES.filter(cat => categoriesFromPosts.includes(cat));
+
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
+        allCategories,
       },
     };
   } catch (error) {
@@ -186,6 +238,7 @@ export async function getServerSideProps() {
     return {
       props: {
         posts: [],
+        allCategories: [],
       },
     };
   }
