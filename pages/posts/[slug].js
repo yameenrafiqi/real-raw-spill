@@ -48,7 +48,7 @@ export default function PostPage({ post }) {
 
   return (
     <Layout>
-      <article className="max-w-4xl mx-auto px-6 py-12">
+      <article className="max-w-6xl mx-auto px-6 py-12">
         <Link
           href="/"
           className="inline-flex items-center px-6 py-3 bg-black text-white font-black border-4 border-black hover:bg-yellow-400 hover:text-black transition-all mb-8 group"
@@ -64,7 +64,7 @@ export default function PostPage({ post }) {
             <img
               src={processImageUrl(post.featuredImage)}
               alt={post.title}
-              className="w-full h-64 md:h-96 object-cover"
+              className="w-full h-80 md:h-[500px] object-cover"
             />
           </div>
         )}
