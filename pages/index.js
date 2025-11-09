@@ -6,7 +6,7 @@ import { connectToDatabase } from "../lib/mongoose";
 import Post from "../models/Post";
 import { processImageUrl } from "../lib/imageUtils";
 
-export default function Home({ posts }) {
+export default function Home({ posts, totalViews }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [typedText, setTypedText] = useState("");
   const fullText = "Unfiltered thoughts on life, growth, and exploration.";
@@ -112,6 +112,11 @@ export default function Home({ posts }) {
                   <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">∞</div>
                   <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase">Raw Ideas</div>
                 </div>
+              </div>
+              
+              <div className="bg-black text-yellow-400 border-4 border-black p-3 sm:p-4 md:p-6 transform hover:translate-x-1 hover:translate-y-1 transition-transform">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 md:mb-2">{totalViews.toLocaleString()}</div>
+                <div className="font-mono text-[10px] sm:text-xs md:text-sm uppercase text-white">Total Views</div>
               </div>
             </div>
           </div>
@@ -284,6 +289,7 @@ export async function getServerSideProps() {
     return {
       props: {
         posts: [],
+        totalViews: 0,
       },
     };
   }
@@ -294,9 +300,18 @@ export async function getServerSideProps() {
       .sort({ createdAt: -1 })
       .lean();
 
+    // Calculate total views from all published posts
+    const totalViewsResult = await Post.aggregate([
+      { $match: { published: true } },
+      { $group: { _id: null, totalViews: { $sum: "$views" } } }
+    ]);
+    
+    const totalViews = totalViewsResult.length > 0 ? totalViewsResult[0].totalViews : 0;
+
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
+        totalViews,
       },
     };
   } catch (error) {
@@ -304,6 +319,7 @@ export async function getServerSideProps() {
     return {
       props: {
         posts: [],
+        totalViews: 0,
       },
     };
   }
