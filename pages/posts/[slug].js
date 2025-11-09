@@ -87,7 +87,7 @@ export default function PostPage({ post }) {
         <div className="border-4 border-black bg-white mb-12">
           <div className="border-b-4 border-black"></div>
           <div className="p-6 md:p-8">
-            <div className="prose prose-lg max-w-none text-lg leading-relaxed" style={{ fontFamily: "'Bookman Old Style', 'URW Bookman', serif" }}>
+            <div className="prose prose-xl max-w-none text-xl md:text-2xl leading-relaxed" style={{ fontFamily: "'Bookman Old Style', 'URW Bookman', serif" }}>
               <ReactMarkdown
                 components={{
                   img: ({ node, ...props }) => (
