@@ -7,9 +7,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { slug } = req.query;
+    const { id } = req.query;
 
-    if (!slug) {
+    if (!id) {
       return res.status(400).json({ message: "Slug is required" });
     }
 
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     // Increment the view count
     const post = await Post.findOneAndUpdate(
-      { slug, published: true },
+      { slug: id, published: true },
       { $inc: { views: 1 } },
       { new: true }
     );
