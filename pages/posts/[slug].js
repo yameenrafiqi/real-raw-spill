@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import { connectToDatabase } from "../../lib/mongoose";
@@ -8,6 +9,23 @@ import { processImageUrl } from "../../lib/imageUtils";
 
 export default function PostPage({ post }) {
   const router = useRouter();
+  const [views, setViews] = useState(post?.views || 0);
+
+  useEffect(() => {
+    if (post?.slug) {
+      // Increment view count when page loads
+      fetch(`/api/posts/${post.slug}/increment-view`, {
+        method: "POST",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.views) {
+            setViews(data.views);
+          }
+        })
+        .catch((err) => console.error("Error incrementing view:", err));
+    }
+  }, [post?.slug]);
 
   if (router.isFallback) {
     return (
@@ -80,6 +98,13 @@ export default function PostPage({ post }) {
             </div>
             <div className="text-gray-600">
               {formattedDate}
+            </div>
+            <div className="flex items-center gap-2 text-gray-600">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span>{views.toLocaleString()} views</span>
             </div>
           </div>
         </header>
