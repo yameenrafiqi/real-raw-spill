@@ -88,6 +88,14 @@ export default function PostPage({ post }) {
         )}
 
         <header className="mb-12 pb-8 border-b-4 border-black">
+          {post.category && (
+            <div className="mb-4">
+              <span className="inline-block px-4 py-2 bg-yellow-400 text-black font-black text-sm uppercase border-2 border-black">
+                {post.category}
+              </span>
+            </div>
+          )}
+          
           <h1 className="text-5xl md:text-7xl font-black leading-none mb-6 break-words">
             {post.title}
           </h1>

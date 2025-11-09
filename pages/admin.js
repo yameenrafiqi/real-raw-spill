@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
+import { CATEGORIES } from "../lib/categories";
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,6 +17,7 @@ export default function Admin() {
     body: "",
     author: "Syed Nayer Ahtisham",
     tags: "",
+    category: "",
     featuredImage: "",
     published: true,
     trending: false,
@@ -143,6 +145,7 @@ export default function Admin() {
           body: "",
           author: "Syed Nayer Ahtisham",
           tags: "",
+          category: "",
           featuredImage: "",
           published: true,
           trending: false,
@@ -166,6 +169,7 @@ export default function Admin() {
       body: post.body,
       author: post.author,
       tags: post.tags.join(", "),
+      category: post.category || "",
       featuredImage: post.featuredImage || "",
       published: post.published,
       trending: post.trending || false,
@@ -209,6 +213,7 @@ export default function Admin() {
       body: "",
       author: "Syed Nayer Ahtisham",
       tags: "",
+      category: "",
       featuredImage: "",
       published: true,
       trending: false,
@@ -381,6 +386,26 @@ export default function Admin() {
                   className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
                   placeholder="tech, web, design"
                 />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-black font-black mb-3 text-xl">
+                  CATEGORY
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400 bg-white"
+                >
+                  <option value="">Select a category...</option>
+                  {CATEGORIES.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="mb-6">

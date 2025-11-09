@@ -26,6 +26,10 @@ const PostSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    category: {
+      type: String,
+      default: "",
+    },
     featuredImage: {
       type: String,
       default: "",
