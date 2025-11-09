@@ -76,34 +76,25 @@ export default function Articles({ posts, allCategories }) {
         {/* Category Filter */}
         <div className="mb-12">
           <h2 className="text-2xl md:text-3xl font-black mb-6">FILTER BY CATEGORY</h2>
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={() => setSelectedCategory("All")}
-              className={`px-4 py-2 font-mono text-sm uppercase border-2 transition-all transform hover:scale-105 ${
-                selectedCategory === "All"
-                  ? "bg-yellow-400 text-black border-black"
-                  : "bg-white text-black border-black hover:bg-yellow-400"
-              }`}
+          <div className="max-w-md">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full px-6 py-4 text-lg font-mono font-black uppercase border-4 border-black bg-yellow-400 text-black focus:outline-none focus:border-black cursor-pointer hover:bg-yellow-300 transition-colors"
             >
-              All ({posts.length})
-            </button>
-            {allCategories.map((category) => {
-              const count = posts.filter(p => p.category === category).length;
-              if (count === 0) return null;
-              return (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 font-mono text-sm uppercase border-2 transition-all transform hover:scale-105 ${
-                    selectedCategory === category
-                      ? "bg-black text-white border-black"
-                      : "bg-white text-black border-black hover:bg-gray-100"
-                  }`}
-                >
-                  {category} ({count})
-                </button>
-              );
-            })}
+              <option value="All" className="font-black">
+                ALL ({posts.length})
+              </option>
+              {allCategories.map((category) => {
+                const count = posts.filter(p => p.category === category).length;
+                if (count === 0) return null;
+                return (
+                  <option key={category} value={category} className="font-black">
+                    {category.toUpperCase()} ({count})
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
 
