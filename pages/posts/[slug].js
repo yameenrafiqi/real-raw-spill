@@ -40,6 +40,7 @@ export default function PostPage({ post }) {
     // Check if user is logged in
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
+    console.log("Login status:", !!token); // Debug log
   }, []);
 
   const handleLike = async () => {
@@ -318,34 +319,39 @@ export default function PostPage({ post }) {
         {comments.length > 0 && (
           <div className="mb-12 border-4 border-black bg-white p-6">
             <h2 className="text-3xl font-black mb-6 uppercase">Comments</h2>
-            {(showAllComments ? comments : comments.slice(0, 3)).map((comment, index) => (
-              <div key={index} className="mb-4 pb-4 border-b-2 border-gray-300 last:border-b-0">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-black">{comment.name}</span>
-                    <span className="text-sm text-gray-600">
-                      {new Date(comment.timestamp).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </span>
+            {comments.map((comment, index) => {
+              // Only show first 3 if not expanded
+              if (!showAllComments && index >= 3) return null;
+              
+              return (
+                <div key={index} className="mb-4 pb-4 border-b-2 border-gray-300 last:border-b-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-black">{comment.name}</span>
+                      <span className="text-sm text-gray-600">
+                        {new Date(comment.timestamp).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </span>
+                    </div>
+                    {isLoggedIn && (
+                      <button
+                        onClick={() => handleDeleteComment(index)}
+                        className="px-4 py-2 bg-red-600 text-white text-xs font-black uppercase hover:bg-red-700 transition-colors border-2 border-black"
+                        title="Delete comment"
+                      >
+                        DELETE
+                      </button>
+                    )}
                   </div>
-                  {isLoggedIn && (
-                    <button
-                      onClick={() => handleDeleteComment(index)}
-                      className="px-3 py-1 bg-red-600 text-white text-sm font-black uppercase hover:bg-red-700 transition-colors"
-                      title="Delete comment"
-                    >
-                      DELETE
-                    </button>
-                  )}
+                  <p className="text-gray-800">{comment.comment}</p>
                 </div>
-                <p className="text-gray-800">{comment.comment}</p>
-              </div>
-            ))}
+              );
+            })}
             {comments.length > 3 && !showAllComments && (
               <button
                 onClick={() => setShowAllComments(true)}
