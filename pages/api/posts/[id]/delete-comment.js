@@ -1,6 +1,5 @@
 import { connectToDatabase } from "../../../../lib/mongoose";
 import Post from "../../../../models/Post";
-import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method !== "DELETE") {
@@ -9,15 +8,14 @@ export default async function handler(req, res) {
 
   try {
     // Verify authentication
-    const token = req.headers.authorization?.replace("Bearer ", "");
-    if (!token) {
+    const adminPass = req.headers.authorization?.replace("Bearer ", "");
+    if (!adminPass) {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    try {
-      jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-      return res.status(401).json({ message: "Invalid token" });
+    // Verify password
+    if (adminPass !== process.env.ADMIN_PASSWORD) {
+      return res.status(401).json({ message: "Invalid password" });
     }
 
     await connectToDatabase();

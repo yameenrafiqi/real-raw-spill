@@ -38,9 +38,9 @@ export default function PostPage({ post }) {
 
   useEffect(() => {
     // Check if user is logged in
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-    console.log("Login status:", !!token); // Debug log
+    const adminPass = localStorage.getItem("adminPass");
+    setIsLoggedIn(!!adminPass);
+    console.log("Login status:", !!adminPass); // Debug log
   }, []);
 
   const handleLike = async () => {
@@ -135,12 +135,12 @@ export default function PostPage({ post }) {
     }
 
     try {
-      const token = localStorage.getItem("token");
+      const adminPass = localStorage.getItem("adminPass");
       const res = await fetch(`/api/posts/${post.slug}/delete-comment`, {
         method: "DELETE",
         headers: { 
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${adminPass}`
         },
         body: JSON.stringify({ commentIndex }),
       });
