@@ -4,9 +4,10 @@ import Link from "next/link";
 import Head from "next/head";
 import { connectToDatabase } from "../lib/mongoose";
 import Post from "../models/Post";
+import SiteSettings from "../models/SiteSettings";
 import { processImageUrl } from "../lib/imageUtils";
 
-export default function Home({ posts, totalViews }) {
+export default function Home({ posts, totalViews, trendingText }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [typedText, setTypedText] = useState("");
   const fullText = "Unfiltered thoughts on life, growth, and exploration.";
@@ -99,7 +100,7 @@ export default function Home({ posts, totalViews }) {
               <div className="bg-black text-white p-4 sm:p-6 md:p-8 border-4 md:border-8 border-black transform hover:translate-x-2 hover:translate-y-2 transition-transform">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 md:mb-4 text-yellow-400">TRENDING NOW</h2>
                 <p className="font-mono text-xs sm:text-sm md:text-lg leading-relaxed">
-                  Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.
+                  {trendingText || "Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between."}
                 </p>
               </div>
               
@@ -289,6 +290,7 @@ export async function getServerSideProps() {
       props: {
         posts: [],
         totalViews: 0,
+        trendingText: "Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.",
       },
     };
   }
@@ -307,10 +309,19 @@ export async function getServerSideProps() {
     
     const totalViews = totalViewsResult.length > 0 ? totalViewsResult[0].totalViews : 0;
 
+    // Fetch trending text from settings
+    let settings = await SiteSettings.findOne();
+    if (!settings) {
+      settings = await SiteSettings.create({
+        trendingText: "Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.",
+      });
+    }
+
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
         totalViews,
+        trendingText: settings.trendingText,
       },
     };
   } catch (error) {
@@ -319,6 +330,7 @@ export async function getServerSideProps() {
       props: {
         posts: [],
         totalViews: 0,
+        trendingText: "Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between.",
       },
     };
   }

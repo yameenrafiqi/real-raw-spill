@@ -10,6 +10,8 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [trendingText, setTrendingText] = useState("");
   const [typedText, setTypedText] = useState("");
   const fullText = "Dashboard Login";
   const [formData, setFormData] = useState({
@@ -43,6 +45,7 @@ export default function Admin() {
       setPassword(savedPass);
       setIsAuthenticated(true);
       fetchPosts(savedPass);
+      fetchSettings();
     }
   }, []);
 
@@ -102,6 +105,44 @@ export default function Admin() {
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/settings");
+      const data = await res.json();
+      if (data.success) {
+        setTrendingText(data.settings.trendingText || "");
+      }
+    } catch (error) {
+      console.error("Error fetching settings:", error);
+    }
+  };
+
+  const updateTrendingText = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/settings", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ trendingText }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("Trending text updated successfully!");
+        setShowSettings(false);
+      } else {
+        alert("Error updating trending text");
+      }
+    } catch (error) {
+      console.error("Error updating settings:", error);
+      alert("Error updating trending text");
     } finally {
       setLoading(false);
     }
@@ -314,6 +355,15 @@ export default function Admin() {
               + NEW POST
             </button>
             <button
+              onClick={() => {
+                setShowSettings(true);
+                fetchSettings();
+              }}
+              className="px-4 md:px-6 py-2 md:py-3 bg-white text-black font-black text-sm md:text-base border-4 border-black hover:bg-yellow-400 transition-all transform hover:scale-105 flex-1 md:flex-none"
+            >
+              TRENDING TEXT
+            </button>
+            <button
               onClick={handleLogout}
               className="px-4 md:px-6 py-2 md:py-3 bg-black text-white font-black text-sm md:text-base border-4 border-white hover:bg-red-600 hover:border-red-600 transition-all transform hover:scale-105"
             >
@@ -324,6 +374,46 @@ export default function Admin() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-12">
+        {showSettings && (
+          <div className="bg-white border-4 md:border-8 border-black p-4 md:p-8 mb-8 relative">
+            <h2 className="text-2xl md:text-4xl font-black text-black mb-6 md:mb-8 border-b-4 border-black pb-4">
+              UPDATE TRENDING NOW TEXT
+            </h2>
+            
+            <div className="mb-6">
+              <label className="block text-black font-black mb-3 text-xl">
+                TRENDING NOW DESCRIPTION
+              </label>
+              <textarea
+                value={trendingText}
+                onChange={(e) => setTrendingText(e.target.value)}
+                rows={4}
+                className="w-full px-4 py-3 border-4 border-black font-mono focus:outline-none focus:border-yellow-400"
+                placeholder="Raw thoughts, unfiltered stories, and real reflections on life, growth, and everything in between."
+              />
+              <p className="text-sm font-mono text-gray-600 mt-2">
+                This text appears in the "TRENDING NOW" section on the home page.
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={updateTrendingText}
+                disabled={loading}
+                className="px-8 py-4 bg-black text-white font-black border-4 border-black hover:bg-yellow-400 hover:text-black transition-all disabled:opacity-50"
+              >
+                {loading ? "UPDATING..." : "UPDATE TEXT"}
+              </button>
+              <button
+                onClick={() => setShowSettings(false)}
+                className="px-8 py-4 bg-white text-black font-black border-4 border-black hover:bg-gray-100 transition-all"
+              >
+                CANCEL
+              </button>
+            </div>
+          </div>
+        )}
+
         {showForm && (
           <div className="bg-white border-4 md:border-8 border-black p-4 md:p-8 mb-8 relative">
             <h2 className="text-2xl md:text-4xl font-black text-black mb-6 md:mb-8 border-b-4 border-black pb-4">
