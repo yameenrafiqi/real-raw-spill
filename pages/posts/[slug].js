@@ -18,6 +18,7 @@ export default function PostPage({ post }) {
   const [commentName, setCommentName] = useState("");
   const [commentText, setCommentText] = useState("");
   const [showAllComments, setShowAllComments] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (post?.slug) {
@@ -34,6 +35,12 @@ export default function PostPage({ post }) {
         .catch((err) => console.error("Error incrementing view:", err));
     }
   }, [post?.slug]);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleLike = async () => {
     if (!likeName.trim()) {
@@ -119,6 +126,34 @@ export default function PostPage({ post }) {
         alert("Failed to copy link");
       }
     );
+  };
+
+  const handleDeleteComment = async (commentIndex) => {
+    if (!confirm("Are you sure you want to delete this comment?")) {
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/posts/${post.slug}/delete-comment`, {
+        method: "DELETE",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ commentIndex }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setComments(data.comments);
+      } else {
+        alert("Failed to delete comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      alert("Failed to delete comment");
+    }
   };
 
   if (router.isFallback) {
@@ -285,17 +320,28 @@ export default function PostPage({ post }) {
             <h2 className="text-3xl font-black mb-6 uppercase">Comments</h2>
             {(showAllComments ? comments : comments.slice(0, 3)).map((comment, index) => (
               <div key={index} className="mb-4 pb-4 border-b-2 border-gray-300 last:border-b-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-black">{comment.name}</span>
-                  <span className="text-sm text-gray-600">
-                    {new Date(comment.timestamp).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'short', 
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-black">{comment.name}</span>
+                    <span className="text-sm text-gray-600">
+                      {new Date(comment.timestamp).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </span>
+                  </div>
+                  {isLoggedIn && (
+                    <button
+                      onClick={() => handleDeleteComment(index)}
+                      className="px-3 py-1 bg-red-600 text-white text-sm font-black uppercase hover:bg-red-700 transition-colors"
+                      title="Delete comment"
+                    >
+                      DELETE
+                    </button>
+                  )}
                 </div>
                 <p className="text-gray-800">{comment.comment}</p>
               </div>
