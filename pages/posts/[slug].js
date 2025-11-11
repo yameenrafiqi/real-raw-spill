@@ -10,6 +10,14 @@ import { processImageUrl } from "../../lib/imageUtils";
 export default function PostPage({ post }) {
   const router = useRouter();
   const [views, setViews] = useState(post?.views || 0);
+  const [likes, setLikes] = useState(post?.likes?.length || 0);
+  const [comments, setComments] = useState(post?.comments || []);
+  const [showLikePrompt, setShowLikePrompt] = useState(false);
+  const [showCommentPrompt, setShowCommentPrompt] = useState(false);
+  const [likeName, setLikeName] = useState("");
+  const [commentName, setCommentName] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [showAllComments, setShowAllComments] = useState(false);
 
   useEffect(() => {
     if (post?.slug) {
@@ -26,6 +34,57 @@ export default function PostPage({ post }) {
         .catch((err) => console.error("Error incrementing view:", err));
     }
   }, [post?.slug]);
+
+  const handleLike = async () => {
+    if (!likeName.trim()) {
+      alert("Please enter your name");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/posts/${post.slug}/like`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: likeName }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setLikes(data.likes);
+        setShowLikePrompt(false);
+        setLikeName("");
+      }
+    } catch (error) {
+      console.error("Error liking post:", error);
+      alert("Failed to like post");
+    }
+  };
+
+  const handleComment = async () => {
+    if (!commentName.trim() || !commentText.trim()) {
+      alert("Please enter your name and comment");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/posts/${post.slug}/comment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: commentName, comment: commentText }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setComments(data.comments);
+        setShowCommentPrompt(false);
+        setCommentName("");
+        setCommentText("");
+      }
+    } catch (error) {
+      console.error("Error commenting:", error);
+      alert("Failed to add comment");
+    }
+  };
 
   if (router.isFallback) {
     return (
@@ -149,6 +208,137 @@ export default function PostPage({ post }) {
                 #{tag}
               </span>
             ))}
+          </div>
+        )}
+
+        {/* Like and Comment Buttons */}
+        <div className="flex flex-wrap gap-4 mb-12">
+          <button
+            onClick={() => setShowLikePrompt(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-white border-4 border-black font-black uppercase hover:bg-yellow-400 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+            </svg>
+            <span>{likes} {likes === 1 ? 'Like' : 'Likes'}</span>
+          </button>
+          
+          <button
+            onClick={() => setShowCommentPrompt(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-white border-4 border-black font-black uppercase hover:bg-yellow-400 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <span>{comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}</span>
+          </button>
+        </div>
+
+        {/* Comments Section */}
+        {comments.length > 0 && (
+          <div className="mb-12 border-4 border-black bg-white p-6">
+            <h2 className="text-3xl font-black mb-6 uppercase">Comments</h2>
+            {(showAllComments ? comments : comments.slice(0, 3)).map((comment, index) => (
+              <div key={index} className="mb-4 pb-4 border-b-2 border-gray-300 last:border-b-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-black">{comment.name}</span>
+                  <span className="text-sm text-gray-600">
+                    {new Date(comment.timestamp).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </span>
+                </div>
+                <p className="text-gray-800">{comment.comment}</p>
+              </div>
+            ))}
+            {comments.length > 3 && !showAllComments && (
+              <button
+                onClick={() => setShowAllComments(true)}
+                className="mt-4 px-4 py-2 bg-black text-white font-black uppercase hover:bg-yellow-400 hover:text-black transition-colors"
+              >
+                READ MORE... ({comments.length - 3} more)
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Like Prompt Modal */}
+        {showLikePrompt && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-yellow-400 border-4 border-black p-8 max-w-md w-full">
+              <h2 className="text-3xl font-black mb-4 uppercase">What's Your Name?</h2>
+              <input
+                type="text"
+                value={likeName}
+                onChange={(e) => setLikeName(e.target.value)}
+                placeholder="Enter your name"
+                className="w-full px-4 py-3 border-4 border-black font-mono mb-4 text-black"
+              />
+              <div className="flex gap-4">
+                <button
+                  onClick={handleLike}
+                  disabled={!likeName.trim()}
+                  className="flex-1 px-6 py-3 bg-black text-white font-black uppercase hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  LIKE
+                </button>
+                <button
+                  onClick={() => {
+                    setShowLikePrompt(false);
+                    setLikeName('');
+                  }}
+                  className="flex-1 px-6 py-3 bg-white text-black border-4 border-black font-black uppercase hover:bg-black hover:text-white transition-colors"
+                >
+                  CANCEL
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Comment Prompt Modal */}
+        {showCommentPrompt && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-yellow-400 border-4 border-black p-8 max-w-md w-full">
+              <h2 className="text-3xl font-black mb-4 uppercase">Leave a Comment</h2>
+              <input
+                type="text"
+                value={commentName}
+                onChange={(e) => setCommentName(e.target.value)}
+                placeholder="Your name"
+                className="w-full px-4 py-3 border-4 border-black font-mono mb-4 text-black"
+              />
+              <textarea
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                placeholder="Your comment"
+                rows="4"
+                className="w-full px-4 py-3 border-4 border-black font-mono mb-4 text-black resize-none"
+              />
+              <div className="flex gap-4">
+                <button
+                  onClick={handleComment}
+                  disabled={!commentName.trim() || !commentText.trim()}
+                  className="flex-1 px-6 py-3 bg-black text-white font-black uppercase hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  SUBMIT
+                </button>
+                <button
+                  onClick={() => {
+                    setShowCommentPrompt(false);
+                    setCommentName('');
+                    setCommentText('');
+                  }}
+                  className="flex-1 px-6 py-3 bg-white text-black border-4 border-black font-black uppercase hover:bg-black hover:text-white transition-colors"
+                >
+                  CANCEL
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
