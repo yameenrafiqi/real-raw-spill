@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     }
 
     // Verify password
-    if (adminPass !== process.env.ADMIN_PASSWORD) {
+    if (adminPass !== process.env.ADMIN_PASS) {
       return res.status(401).json({ message: "Invalid password" });
     }
 
