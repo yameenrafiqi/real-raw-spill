@@ -1,5 +1,6 @@
 import { connectToDatabase } from "../../../../lib/mongoose";
 import Post from "../../../../models/Post";
+import Notification from "../../../../models/Notification";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -33,6 +34,17 @@ export default async function handler(req, res) {
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
+
+    // Create notification for comment
+    await Notification.create({
+      type: "comment",
+      postTitle: post.title,
+      postSlug: post.slug,
+      userName: name,
+      comment,
+      read: false,
+      timestamp: new Date(),
+    });
 
     return res.status(200).json({ 
       success: true, 

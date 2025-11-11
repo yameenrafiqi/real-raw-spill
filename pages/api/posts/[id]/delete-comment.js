@@ -9,12 +9,16 @@ export default async function handler(req, res) {
   try {
     // Verify authentication
     const adminPass = req.headers.authorization?.replace("Bearer ", "");
+    console.log("Received adminPass:", adminPass);
+    console.log("Expected adminPass:", process.env.ADMIN_PASS);
+    
     if (!adminPass) {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
     // Verify password
     if (adminPass !== process.env.ADMIN_PASS) {
+      console.log("Password mismatch!");
       return res.status(401).json({ message: "Invalid password" });
     }
 
